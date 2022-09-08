@@ -7,10 +7,11 @@ public class Jump : MonoBehaviour
     [SerializeField] private PlayerController input; // reference to the PlayerController which gets input
     [SerializeField, Range(0f, 10f)] private float jumpHeight = 3f; // variable to calculate jump height
     [SerializeField, Range(0, 5)] private int maxAirJumps = 0; // number of air jumps player can perform (double jumps)
-    [SerializeField, Range(0f, 10f)] private float downwardMovementMultiplier = 3f; // when falling, adds multiplier to gravity
+    [SerializeField, Range(0f, 10f)] private float downwardMovementMultiplier = 3f; // when falling, adds multiplier to gravity NOT ACTUALLY A MULTIPLIER, JUST CHANGES GRAVITY TO A STATIC VALUE
     [SerializeField, Range(0f, 10f)] private float upwardMovementMultiplier = 3f; // when moving upward (and holding button) adds multiplier to gravity
     [SerializeField, Range(0f, 10f)] private float lowUpwardMovementModifier = 2f; // when moving upward (and not holding button) adds multiplier to gravity
     [SerializeField, Range(0f, 5f)] private float jumpCoolDown = .25f; // jump cool down timer
+    [SerializeField, Range(-100f, 100f)] private float terminalVelocity = -7f;
 
     private Vector2 velocity; // Vector2 to store velocity in
     private Rigidbody2D body; // reference to player's Rigidbody2D
@@ -70,6 +71,10 @@ public class Jump : MonoBehaviour
     {
         onGround = ground.GetOnGround();
         velocity = body.velocity;
+
+        // checking if the rigid body is moving too quickly and clamping the magnitude
+        if (body.velocity.magnitude > terminalVelocity)
+            body.velocity = Vector2.ClampMagnitude(body.velocity, terminalVelocity);
 
         if (onGround)
         {

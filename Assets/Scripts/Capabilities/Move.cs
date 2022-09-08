@@ -7,12 +7,16 @@ public class Move : MonoBehaviour
     [SerializeField, Range(0f, 100f)] private float maxSpeed = 4f;
     [SerializeField, Range(0f, 100f)] private float maxAcceleration = 35f;
     [SerializeField, Range(0f, 100f)] private float maxAirAcceleration = 20f;
+    [SerializeField, Range(0f, 100f)] private float maxDeceleration = 20f;
 
     private Vector2 direction;
     private Vector2 desiredVelocity;
     private Vector2 velocity;
     private Rigidbody2D body;
     private Ground ground;
+
+    [SerializeField] private MovingPlatformCheck movingPlatformCheck; // a reference to the MovingPlatformCheck to determine if on a moving platform
+
  //   private Dash dash;
 
     private float maxSpeedChange;
@@ -35,6 +39,7 @@ public class Move : MonoBehaviour
  //       {
             direction.x = input.RetrieveMoveInput();
             desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - ground.GetFriction(), 0f);
+
  //       }
 
     }
@@ -51,7 +56,14 @@ public class Move : MonoBehaviour
 
         body.velocity = velocity;
 
-        if (velocity.x < 0f && facingRight)
+        /*
+        if (movingPlatformCheck.GetOnPlatform() == true && onGround)
+            body.velocity = velocity + movingPlatformCheck.GetHit().velocity;
+        else
+            body.velocity = velocity;
+        */ 
+
+        if (velocity.x < 0f && facingRight)                 // I COULD change these to direction.x instead of velocity.x and then it'd swap the direction of the character when sliding the other way?
         {
             Flip();
         }
@@ -59,6 +71,9 @@ public class Move : MonoBehaviour
         {
             Flip();
         }
+
+//        Debug.Log(movingPlatformCheck.GetOnPlatform());
+
     }
 
     private void Flip()
