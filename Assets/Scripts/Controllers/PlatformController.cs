@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlatformController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlatformController : MonoBehaviour
     [SerializeField] private bool isMoving = false;
     [SerializeField] private bool isBouncy = false;
     [SerializeField] private bool isSlippery = false;
+    [SerializeField] private bool isFalling = false;
     [SerializeField] private bool isBreakable = false;
     [SerializeField] private bool isGear = false;
 
@@ -27,7 +29,11 @@ public class PlatformController : MonoBehaviour
     [SerializeField] private float rotationDirection;           // Positive 1 for rotating clockwise, negative 1 for counterclockwise
     [SerializeField] private float rotationSpeed;               // 
 
-    // Variables for **** platform
+    // Variables for falling platform
+
+    [SerializeField] private float fallSpeed = .08f;
+    private bool steppedOnFalling = false;
+
 
     private void Awake()
     {
@@ -73,11 +79,19 @@ public class PlatformController : MonoBehaviour
         if (steppedOnBreakable)
         {
             breakTimer += Time.deltaTime;
-            Debug.Log("Got to addition");
+          //  Debug.Log("Got to addition");
         }
 
-        Debug.Log(breakTimer);
-        Debug.Log(steppedOnBreakable);
+        //Debug.Log(breakTimer);
+        //Debug.Log(steppedOnBreakable);
+
+        if (steppedOnFalling)
+        {
+            Debug.Log("Got to Stepped on Falling");
+            //gameObject.transform.position += new Vector3(0, (-1 * fallSpeed), 0);
+            //Debug.Log("Got to addition");
+            gameObject.transform.GetComponent<Rigidbody2D>().MovePosition(new Vector3(transform.position.x, (transform.position.y) - (1 * fallSpeed), 0));
+        }
 
     }
 
@@ -94,6 +108,18 @@ public class PlatformController : MonoBehaviour
                 steppedOnBreakable = true;
             }
         }
+
+        if (isFalling)
+        {
+            if (collision.collider.tag == "Player") ;
+            {
+                Debug.Log("Got to is Falling");
+                //gameObject.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                steppedOnFalling = true;
+            }
+
+        }
+
     }
 
     private void RotateGear()

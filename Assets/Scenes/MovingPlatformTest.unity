@@ -380,7 +380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!249 &101931477
 AreaEffector2D:
   serializedVersion: 2
@@ -908,6 +908,7 @@ MonoBehaviour:
   isMoving: 0
   isBouncy: 0
   isSlippery: 0
+  isFalling: 0
   isBreakable: 0
   isGear: 1
   waypoints: []
@@ -916,6 +917,7 @@ MonoBehaviour:
   timeToBreak: 3
   rotationDirection: 1
   rotationSpeed: 0.1
+  fallSpeed: 0
 --- !u!50 &224830763
 Rigidbody2D:
   serializedVersion: 4
@@ -1558,7 +1560,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.46, y: 1.645203, z: -10}
+  m_LocalPosition: {x: -15.43, y: -4.364797, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1983,6 +1985,7 @@ MonoBehaviour:
   isMoving: 0
   isBouncy: 1
   isSlippery: 0
+  isFalling: 0
   isBreakable: 0
   isGear: 0
   waypoints:
@@ -1993,6 +1996,7 @@ MonoBehaviour:
   timeToBreak: 3
   rotationDirection: 0
   rotationSpeed: 0
+  fallSpeed: 0
 --- !u!50 &686802980
 Rigidbody2D:
   serializedVersion: 4
@@ -6076,6 +6080,7 @@ MonoBehaviour:
   isMoving: 0
   isBouncy: 1
   isSlippery: 0
+  isFalling: 0
   isBreakable: 0
   isGear: 0
   waypoints:
@@ -6086,6 +6091,7 @@ MonoBehaviour:
   timeToBreak: 3
   rotationDirection: 0
   rotationSpeed: 0
+  fallSpeed: 0
 --- !u!50 &885962720
 Rigidbody2D:
   serializedVersion: 4
@@ -7076,6 +7082,7 @@ MonoBehaviour:
   isMoving: 0
   isBouncy: 0
   isSlippery: 0
+  isFalling: 0
   isBreakable: 1
   isGear: 0
   waypoints:
@@ -7086,6 +7093,7 @@ MonoBehaviour:
   timeToBreak: 3
   rotationDirection: 0
   rotationSpeed: 0
+  fallSpeed: 0
 --- !u!50 &1342215165
 Rigidbody2D:
   serializedVersion: 4
@@ -7365,6 +7373,166 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1421341618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1421341623}
+  - component: {fileID: 1421341622}
+  - component: {fileID: 1421341621}
+  - component: {fileID: 1421341620}
+  - component: {fileID: 1421341619}
+  m_Layer: 0
+  m_Name: FallingPlatform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1421341619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421341618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78087ac9803c49740b7914a982ce57aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMoving: 0
+  isBouncy: 0
+  isSlippery: 0
+  isFalling: 1
+  isBreakable: 0
+  isGear: 0
+  waypoints:
+  - {fileID: 72511477}
+  - {fileID: 996273308}
+  moveSpeed: 2
+  target: 0
+  timeToBreak: 3
+  rotationDirection: 0
+  rotationSpeed: 0
+  fallSpeed: 0.08
+--- !u!50 &1421341620
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421341618}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: 7ec1a0dc46b98e543beaa4380b8fdfeb, type: 2}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &1421341621
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421341618}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 7ec1a0dc46b98e543beaa4380b8fdfeb, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!212 &1421341622
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421341618}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1421341623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421341618}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -23, y: -7.5, z: 0}
+  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1456342424 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 601621614705981209, guid: 50d74b56b9791794383a61930372c660, type: 3}
@@ -7411,6 +7579,7 @@ MonoBehaviour:
   isMoving: 1
   isBouncy: 0
   isSlippery: 0
+  isFalling: 0
   isBreakable: 0
   isGear: 0
   waypoints:
@@ -7421,6 +7590,7 @@ MonoBehaviour:
   timeToBreak: 3
   rotationDirection: 0
   rotationSpeed: 0
+  fallSpeed: 0
 --- !u!50 &1500710823
 Rigidbody2D:
   serializedVersion: 4
@@ -8039,6 +8209,7 @@ MonoBehaviour:
   isMoving: 0
   isBouncy: 0
   isSlippery: 0
+  isFalling: 0
   isBreakable: 0
   isGear: 1
   waypoints: []
@@ -8047,6 +8218,7 @@ MonoBehaviour:
   timeToBreak: 3
   rotationDirection: -1
   rotationSpeed: 0.2
+  fallSpeed: 0
 --- !u!50 &1634263257
 Rigidbody2D:
   serializedVersion: 4
@@ -11206,7 +11378,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1653214536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.46, y: -0.03, z: 0}
+  m_LocalPosition: {x: -15.43, y: -6.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 2109226075}
@@ -11807,7 +11979,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728820071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.46, y: 1.645203, z: -10}
+  m_LocalPosition: {x: -15.43, y: -4.364797, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 894046911}
